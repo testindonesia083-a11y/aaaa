@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeApp - Plataforma de Aprendizado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="min-h-screen bg-background">
+        <!-- Header -->
+        <header class="border-b border-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <h1 class="text-2xl font-bold text-primary">LifeApp</h1>
+                    <div class="flex items-center gap-4">
+                        <!-- User Menu -->
+                        <div id="user-menu" class="relative hidden">
+                            <button id="user-menu-button" class="flex items-center gap-2 p-2 rounded-lg hover:bg-muted">
+                                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                    <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <span id="user-name" class="text-sm font-medium"></span>
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </button>
+                            <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-lg shadow-lg hidden z-50">
+                                <div class="p-2">
+                                    <button id="profile-btn" class="w-full text-left px-3 py-2 text-sm hover:bg-muted rounded">
+                                        <i data-lucide="user" class="w-4 h-4 inline mr-2"></i>
+                                        Meu Perfil
+                                    </button>
+                                    <button id="settings-btn" class="w-full text-left px-3 py-2 text-sm hover:bg-muted rounded">
+                                        <i data-lucide="settings" class="w-4 h-4 inline mr-2"></i>
+                                        Configurações
+                                    </button>
+                                    <hr class="my-2 border-border">
+                                    <button id="logout-btn" class="w-full text-left px-3 py-2 text-sm hover:bg-muted rounded text-red-600">
+                                        <i data-lucide="log-out" class="w-4 h-4 inline mr-2"></i>
+                                        Sair
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Login Button (shown when not logged in) -->
+                        <button id="login-btn" class="btn-primary">
+                            <i data-lucide="log-in" class="w-4 h-4 inline mr-2"></i>
+                            Entrar
+                        </button>
+                        
+                        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-muted">
+                            <i data-lucide="sun" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="border-b border-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-8">
+                    <button class="tab-button active" data-tab="principal">Principal</button>
+                    <button class="tab-button" data-tab="continue">Continuar Assistindo</button>
+                    <button class="tab-button" data-tab="more">Mais Conteúdo</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Principal Tab -->
+            <div id="tab-principal" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-foreground mb-2">Módulos de Aprendizado</h2>
+                    <p class="text-muted-foreground">Explore nossos módulos educacionais interativos</p>
+                </div>
+
+                <!-- Module Carousel -->
+                <div class="carousel-container mb-8">
+                    <div id="module-carousel" class="carousel">
+                        <!-- Modules will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="play" class="text-white w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Início Rápido</h3>
+                        <p class="text-muted-foreground mb-4">Comece sua jornada de aprendizado em minutos</p>
+                        <button id="quick-start-btn" class="text-blue-500 font-medium hover:underline">
+                            Começar agora →
+                        </button>
+                    </div>
+
+                    <div class="card p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="trending-up" class="text-white w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Progresso</h3>
+                        <p class="text-muted-foreground mb-4">Acompanhe seu desenvolvimento</p>
+                        <button id="progress-btn" class="text-blue-500 font-medium hover:underline">
+                            Ver progresso →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue Watching Tab -->
+            <div id="tab-continue" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-foreground mb-2">Continuar Assistindo</h2>
+                    <p class="text-muted-foreground">Continue de onde parou</p>
+                </div>
+                <div class="text-center py-16">
+                    <div class="text-6xl mb-4">📺</div>
+                    <h3 class="text-xl font-semibold mb-2">Nenhum vídeo em progresso</h3>
+                    <p class="text-muted-foreground">Comece assistindo alguns vídeos para vê-los aqui</p>
+                </div>
+            </div>
+
+            <!-- More Content Tab -->
+            <div id="tab-more" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-foreground mb-2">Mais Conteúdos</h2>
+                    <p class="text-muted-foreground">Explore nossa biblioteca completa de cursos</p>
+                </div>
+                <div class="flex items-center justify-center min-h-[400px]">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🚀</div>
+                        <h3 class="text-2xl font-semibold text-foreground mb-2">Em breve</h3>
+                        <p class="text-muted-foreground">Novos conteúdos incríveis estão chegando!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Module Modal -->
+        <div id="module-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="p-6 border-b border-border flex items-center justify-between">
+                    <h2 id="modal-title" class="text-2xl font-bold"></h2>
+                    <button id="close-modal" class="p-2 hover:bg-muted rounded-lg transition-colors">
+                        <i data-lucide="x" class="w-6 h-6 text-muted-foreground"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div id="modal-content" class="video-grid">
+                        <!-- Videos will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Player Modal -->
+        <div id="video-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="p-6 border-b border-border flex items-center justify-between">
+                    <h2 id="video-title" class="text-2xl font-bold"></h2>
+                    <button id="close-video" class="p-2 hover:bg-muted rounded-lg transition-colors">
+                        <i data-lucide="x" class="w-6 h-6 text-muted-foreground"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="aspect-video">
+                        <iframe id="youtube-player" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Modal -->
+        <div id="progress-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="p-6 border-b border-border flex items-center justify-between">
+                    <h2 class="text-2xl font-bold">Seu Progresso</h2>
+                    <button id="close-progress" class="p-2 hover:bg-muted rounded-lg transition-colors">
+                        <i data-lucide="x" class="w-6 h-6 text-muted-foreground"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="text-center py-16">
+                        <div class="text-6xl mb-4">📊</div>
+                        <h3 class="text-xl font-semibold mb-2">Acompanhe seu progresso</h3>
+                        <p class="text-muted-foreground">Comece assistindo vídeos para ver seu progresso aqui</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal hidden">
+            <div class="modal-content max-w-md">
+                <div class="p-6 border-b border-border">
+                    <h2 class="text-2xl font-bold text-center">Entrar na LifeApp</h2>
+                </div>
+                <div class="p-6">
+                    <form id="login-form" class="space-y-4">
+                        <div>
+                            <label for="login-email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="login-email" required 
+                                   class="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="login-password" class="block text-sm font-medium mb-2">Senha</label>
+                            <input type="password" id="login-password" required 
+                                   class="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <button type="submit" class="w-full btn-primary">
+                            <i data-lucide="log-in" class="w-4 h-4 inline mr-2"></i>
+                            Entrar
+                        </button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-muted-foreground">
+                            Não tem uma conta? 
+                            <button id="show-register" class="text-primary hover:underline">Criar conta</button>
+                        </p>
+                    </div>
+                </div>
+                <button id="close-login" class="absolute top-4 right-4 p-2 hover:bg-muted rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div id="register-modal" class="modal hidden">
+            <div class="modal-content max-w-md">
+                <div class="p-6 border-b border-border">
+                    <h2 class="text-2xl font-bold text-center">Criar Conta</h2>
+                </div>
+                <div class="p-6">
+                    <form id="register-form" class="space-y-4">
+                        <div>
+                            <label for="register-name" class="block text-sm font-medium mb-2">Nome completo</label>
+                            <input type="text" id="register-name" required 
+                                   class="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="register-email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="register-email" required 
+                                   class="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="register-password" class="block text-sm font-medium mb-2">Senha</label>
+                            <input type="password" id="register-password" required 
+                                   class="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="register-confirm" class="block text-sm font-medium mb-2">Confirmar senha</label>
+                            <input type="password" id="register-confirm" required 
+                                   class="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <button type="submit" class="w-full btn-primary">
+                            <i data-lucide="user-plus" class="w-4 h-4 inline mr-2"></i>
+                            Criar Conta
+                        </button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-muted-foreground">
+                            Já tem uma conta? 
+                            <button id="show-login" class="text-primary hover:underline">Fazer login</button>
+                        </p>
+                    </div>
+                </div>
+                <button id="close-register" class="absolute top-4 right-4 p-2 hover:bg-muted rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profile-modal" class="modal hidden">
+            <div class="modal-content max-w-2xl">
+                <div class="p-6 border-b border-border flex items-center justify-between">
+                    <h2 class="text-2xl font-bold">Meu Perfil</h2>
+                    <button id="close-profile" class="p-2 hover:bg-muted rounded-lg">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-6 mb-6">
+                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 id="profile-name" class="text-xl font-semibold"></h3>
+                            <p id="profile-email" class="text-muted-foreground"></p>
+                            <p class="text-sm text-muted-foreground">Membro desde <span id="profile-since"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <h4 class="font-semibold">Estatísticas</h4>
+                            <div class="bg-muted rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm">Aulas assistidas</span>
+                                    <span class="font-semibold" id="stats-videos">0</span>
+                                </div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm">Módulos concluídos</span>
+                                    <span class="font-semibold" id="stats-modules">0</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Tempo total</span>
+                                    <span class="font-semibold" id="stats-time">0h</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <h4 class="font-semibold">Configurações</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center justify-between">
+                                    <span class="text-sm">Notificações por email</span>
+                                    <input type="checkbox" id="email-notifications" class="toggle">
+                                </label>
+                                <label class="flex items-center justify-between">
+                                    <span class="text-sm">Reprodução automática</span>
+                                    <input type="checkbox" id="autoplay" class="toggle">
+                                </label>
+                                <label class="flex items-center justify-between">
+                                    <span class="text-sm">Modo escuro</span>
+                                    <input type="checkbox" id="dark-mode-toggle" class="toggle">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Required Overlay -->
+        <div id="auth-required" class="fixed inset-0 bg-black/50 z-40 flex items-center justify-center hidden">
+            <div class="bg-card rounded-xl p-8 max-w-md mx-4 text-center">
+                <div class="text-4xl mb-4">🔒</div>
+                <h3 class="text-xl font-semibold mb-2">Login Necessário</h3>
+                <p class="text-muted-foreground mb-6">Faça login para acessar este conteúdo exclusivo</p>
+                <div class="space-y-3">
+                    <button id="auth-login-btn" class="w-full btn-primary">Fazer Login</button>
+                    <button id="auth-register-btn" class="w-full border border-border py-2 px-4 rounded-lg hover:bg-muted">
+                        Criar Conta Grátis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
